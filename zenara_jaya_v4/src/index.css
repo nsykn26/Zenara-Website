@@ -1,0 +1,436 @@
+@import 'tailwindcss';
+@plugin 'lightswind/plugin';
+@import 'tailwind-scrollbar-hide/v4';
+
+/*--------------------------------
+        CUSTOM PROPERTIES
+---------------------------------*/
+
+:root {
+  --background-color: #101010;
+  --black-color: #101010;
+  --white-color: #F3F3F3;
+  --link-color: #6B21A8;
+  --link-hover-color: #A855F7;
+  --linear-gradient: linear-gradient(100deg, rgba(107, 33, 168, 1) 0%, rgba(168, 85, 247, 1) 50%, rgba(246, 10, 84, 1) 100%);
+
+  --primary-font-family: "Atkinson Hyperlegible Mono", sans-serif;
+  --body-font-family: "Atkinson Hyperlegible Mono", sans-serif;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+}
+
+#root {
+  padding: 70px 0;
+  position: relative;
+  z-index: 1;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--background-color);
+  font-family: var(--body-font-family);
+  width: 100%;
+  color: var(--white-color);
+
+}
+
+/*--------------------------------
+      CUSTOM CURSOR
+---------------------------------*/
+
+.custom-cursor {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border: 2px solid white;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease, border-width 0.2s ease;
+  background: transparent;
+  will-change: transform;
+}
+
+.custom-cursor::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+}
+
+/*
+#cursor,
+#follower {
+  position: fixed;
+  pointer-events: none;
+  z-index: 50;
+ 
+
+
+border-radius: 999px;
+transform: translate(-50%, -50%);
+}
+ 
+#cursor {
+  height: 0.5rem;
+  width: 0.5rem;
+  background-color: var(--white-color);
+}
+
+#follower {
+  height: 2rem;
+  width: 2rem;
+  background-color: transparent;
+  border: 1.5px solid var(--white-color);
+}
+
+*/
+
+
+/*--------------------------------
+      TYPOGRAPHY
+---------------------------------*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--font-weight-bold);
+  font-family: var(--primary-font-family);
+}
+
+p,
+span,
+a,
+li,
+div,
+button {
+  font-weight: var(--font-weight-normal);
+  font-family: var(--body-font-family);
+}
+
+.gradient-word {
+  background-image: var(--linear-gradient);
+
+  /* Ensure the element wraps tightly around text for proper gradient display */
+  display: inline-block;
+
+  /* 2. Clip the background to the text's shape */
+  background-clip: text;
+  -webkit-background-clip: text;
+  /* Vendor prefix for broader compatibility */
+
+  /* 3. Make the actual text transparent so the background shows through */
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/*--------------------------------
+      GLASSMORPHISM BACKGROUND
+---------------------------------*/
+
+.glassmorphism-background {
+  background-color: rgba(26, 26, 26, 0.1) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/*--------------------------------
+      BUTTONS
+---------------------------------*/
+.btn-primary {
+  padding: 10px;
+  font-size: 17px;
+  background-color: var(--white-color);
+  color: var(--black-color);
+  transition: all 1.8s ease;
+}
+
+.btn-primary:hover {
+  background: var(--linear-gradient);
+  color: var(--black-color);
+  transition: all 2.8s ease;
+  border: 1px solid var(--black-color);
+  cursor: pointer;
+}
+
+.btn-secondary {
+  padding: 10px;
+  font-size: 17px;
+  background-color: transparent;
+  color: var(--white-color);
+  border: 1px solid var(--white-color);
+  transition: all 1.8s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--linear-gradient);
+  border: 1px solid var(--black-color);
+  transition: all 2.8s ease;
+  cursor: pointer;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+
+/*--------------------------------
+      NAVBAR
+---------------------------------*/
+.header {
+  border-bottom: 1px solid var(--link-hover-color);
+  border-radius: 0 0 20px 20px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+}
+.header-hidden {
+  transform: translateY(-150%);
+}
+
+.navbar a {
+  color: var(--white-color);
+  text-decoration: none;
+
+}
+
+.navbar a:hover {
+  color: var(--link-hover-color);
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+
+
+
+
+/*--------------------------------
+      SECTION HEADING
+---------------------------------*/
+.section-container {
+  align-self: self-start;
+  padding-left: 110px;
+}
+
+.section-heading {
+  border: 1px solid var(--link-hover-color);
+  border-radius: 25px;
+  font-size: 16px;
+  padding: 10px 20px;
+  display: flex;
+}
+
+
+/*--------------------------------
+     BANNER SECTION
+---------------------------------*/
+
+.banner-section {
+  padding: 70px 50px;
+}
+
+.orb-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  /* let interactions pass through to content */
+}
+
+/*--------------------------------
+      FOOTER
+---------------------------------*/
+
+.footer {
+  padding: 50px 20px;
+  bottom: 0;
+  border-top: 1px solid var(--link-hover-color);
+  border-radius: 20px 20px 0 0;
+  flex-shrink: 0;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer>.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.footer-bottom {
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+.footer-links,
+.footer-contact {
+  list-style: none;
+  /* Removes bullet points */
+  padding: 0;
+  margin: 0;
+}
+
+.footer .footer-section a {
+  text-decoration: none;
+}
+
+.footer .footer-section a:hover {
+  color: var(--link-hover-color);
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.footer-logo {
+  width: 60%;
+  height: auto;
+}
+
+/*--------------------------------
+      ABOUT SECTION
+---------------------------------*/
+
+.about-section .row {
+  padding: 70px 20px;
+}
+
+.about-content-text {
+  padding: 200px 100px;
+}
+
+
+/*--------------------------------
+      WHY US SECTION
+---------------------------------*/
+
+.why-us-section {
+  padding-top: 20px;
+  align-content: center;
+}
+
+.why-us-section .parallax {
+  position: relative;
+  overflow: hidden;
+}
+
+.why-us-section .scroller {
+  display: flex;
+  white-space: nowrap;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 2.25rem;
+  font-weight: bold;
+  letter-spacing: -0.02em;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
+}
+
+.why-us-section .scroller span {
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .why-us-section .scroller {
+    font-size: 5rem;
+    line-height: 5rem;
+  }
+}
+
+/*--------------------------------
+     NEW FUTURE PLANNING SECTION
+---------------------------------*/
+
+.timeline .section-heading {
+  justify-self: self-start;
+}
+
+
+
+
+/*--------------------------------
+      CONTACT SECTION
+---------------------------------*/
+
+.contact-section .section-heading {
+  width: 140px;
+  padding-top: 7px;
+}
+
+.contact-section {
+  padding: 70px 20px;
+}
+
+.contact-form-container {
+  padding: 20px;
+}
+
+.contact-form {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-form-card label {
+  font-size: 17px;
+}
+
+.contact-form-card input {
+  font-size: 17px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid;
+  width: 100%;
+}
+
+.contact-form-card input:focus {
+  outline: none;
+  border: 1px solid var(--link-color);
+}
+
+.contact-get-in-touch {
+  padding-top: 20px;
+}
+
+/*--------------------------------
+      PORTFOLIO SECTION
+--------------------------------*/
+
+.portfolio-section {
+  padding: 70px 20px;
+}
+
+.portfolio-section .section-container {
+  align-self: self-start;
+  padding-left: 110px;
+}
+
+.portfolio-section .section-heading {
+  justify-self: self-start;
+}
+
+/*--------------------------------
+      CONTEST SECTION
+---------------------------------*/
+
+
+.contest-section .section-heading {
+  width: 16.5%;
+  display: flex;
+}
+
