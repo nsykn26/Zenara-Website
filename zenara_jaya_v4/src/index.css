@@ -70,34 +70,6 @@ body {
   border-radius: 50%;
 }
 
-/*
-#cursor,
-#follower {
-  position: fixed;
-  pointer-events: none;
-  z-index: 50;
- 
-
-
-border-radius: 999px;
-transform: translate(-50%, -50%);
-}
- 
-#cursor {
-  height: 0.5rem;
-  width: 0.5rem;
-  background-color: var(--white-color);
-}
-
-#follower {
-  height: 2rem;
-  width: 2rem;
-  background-color: transparent;
-  border: 1.5px solid var(--white-color);
-}
-
-*/
-
 
 /*--------------------------------
       TYPOGRAPHY
@@ -210,8 +182,9 @@ button {
 
 .navbar a:hover {
   color: var(--link-hover-color);
-  transition: all 0.5s ease;
+  transition: all 0.2s ease;
   cursor: pointer;
+  font-style: italic;
 }
 
 
@@ -293,8 +266,9 @@ button {
 
 .footer .footer-section a:hover {
   color: var(--link-hover-color);
-  transition: all 0.5s ease;
+  transition: all 0.2s ease;
   cursor: pointer;
+  font-style: italic;
 }
 
 .footer-logo {

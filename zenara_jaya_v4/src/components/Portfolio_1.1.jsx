@@ -21,7 +21,7 @@ const imageItems = [
 
 export default function Portfolio() {
   return (
-    <div className="w-full antialiased portfolio-section bg-(--background-color) py-16">
+    <section id="portfolio" className="w-full antialiased portfolio-section bg-(--background-color) py-16">
         <div className="section-container ">
             <div className="font-bold section-heading">
               <h2>Portfolio</h2>&nbsp;
@@ -32,6 +32,6 @@ export default function Portfolio() {
         imageItems={imageItems}
        /* description="Highlights of our latest projects" */
       />
-    </div>
+    </section>
   )
 }
