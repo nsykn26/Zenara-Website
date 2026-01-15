@@ -2,6 +2,17 @@ import { Mesh, Program, Renderer, Triangle, Vec3 } from 'ogl';
 import { useEffect, useRef } from 'react';
 import '../../index.css';
 
+function canUseWebGL() {
+  try {
+    const canvas = document.createElement('canvas');
+    const gl =
+      canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    return !!gl;
+  } catch {
+    return false;
+  }
+}
+
 export default function Orb({
   hue = 0,
   hoverIntensity = 0.2,
@@ -10,6 +21,12 @@ export default function Orb({
   backgroundColor = '#000000'
 }) {
   const ctnDom = useRef(null);
+  const propsRef = useRef({ hue, hoverIntensity, rotateOnHover, forceHoverState, backgroundColor });
+
+  // Update refs when props change
+  useEffect(() => {
+    propsRef.current = { hue, hoverIntensity, rotateOnHover, forceHoverState, backgroundColor };
+  }, [hue, hoverIntensity, rotateOnHover, forceHoverState, backgroundColor]);
 
   const vert = /* glsl */ `
     precision highp float;
@@ -187,8 +204,19 @@ export default function Orb({
     const container = ctnDom.current;
     if (!container) return;
 
-    const renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
-    const gl = renderer.gl;
+    if (!canUseWebGL()) {
+      return;
+    }
+
+    let renderer;
+    let gl;
+    try {
+      renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
+      gl = renderer.gl;
+    } catch (e) {
+      console.error('Orb: WebGL initialization failed', e);
+      return;
+    }
     gl.clearColor(0, 0, 0, 0);
     container.appendChild(gl.canvas);
 
@@ -262,14 +290,14 @@ export default function Orb({
       const dt = (t - lastTime) * 0.001;
       lastTime = t;
       program.uniforms.iTime.value = t * 0.001;
-      program.uniforms.hue.value = hue;
-      program.uniforms.hoverIntensity.value = hoverIntensity;
-      program.uniforms.backgroundColor.value = hexToVec3(backgroundColor);
+      program.uniforms.hue.value = propsRef.current.hue;
+      program.uniforms.hoverIntensity.value = propsRef.current.hoverIntensity;
+      program.uniforms.backgroundColor.value = hexToVec3(propsRef.current.backgroundColor);
 
-      const effectiveHover = forceHoverState ? 1 : targetHover;
+      const effectiveHover = propsRef.current.forceHoverState ? 1 : targetHover;
       program.uniforms.hover.value += (effectiveHover - program.uniforms.hover.value) * 0.1;
 
-      if (rotateOnHover && effectiveHover > 0.5) {
+      if (propsRef.current.rotateOnHover && effectiveHover > 0.5) {
         currentRot += dt * rotationSpeed;
       }
       program.uniforms.rot.value = currentRot;
@@ -283,11 +311,13 @@ export default function Orb({
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseout', handleMouseLeave);
-      container.removeChild(gl.canvas);
+      if (container && gl.canvas && container.contains(gl.canvas)) {
+        container.removeChild(gl.canvas);
+      }
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hue, hoverIntensity, rotateOnHover, forceHoverState, backgroundColor]);
+  }, []);
 
   return <div ref={ctnDom} className="orb-container" />;
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion as Motion, useMotionValue, useSpring } from "framer-motion";
 import { MoveUpRight as ArrowIcon } from "lucide-react";
 
 const visualData = [
@@ -106,7 +106,7 @@ const Services = () => {
         ))}
 
         {isLargeScreen && focusedItem && (
-          <motion.img
+          <Motion.img
             src={focusedItem.url}
             alt={focusedItem.label}
             className="fixed z-30 object-cover w-[300px] h-[400px] rounded-lg pointer-events-none shadow-2xl "

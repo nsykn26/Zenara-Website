@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import {
-  motion,
+  motion as Motion,
   useScroll,
   useTransform,
   AnimatePresence,
@@ -35,14 +35,14 @@ const ImageModal = ({
   onClose,
 }) => {
   return (
-    <motion.div
+    <Motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
       onClick={onClose}
     >
-      <motion.div
+      <Motion.div
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 20 }}
@@ -54,7 +54,7 @@ const ImageModal = ({
           alt={item.title}
           className="h-auto max-h-[90vh] w-full rounded-lg object-contain"
         />
-      </motion.div>
+      </Motion.div>
       <button
         onClick={onClose}
         className="absolute right-4 top-4 text-white/80 transition-colors hover:text-white"
@@ -62,7 +62,7 @@ const ImageModal = ({
       >
         <X size={24} />
       </button>
-    </motion.div>
+    </Motion.div>
   )
 }
 
@@ -84,7 +84,7 @@ const InteractiveImageBentoGallery = ({ imageItems, title, description }) => {
       ref={targetRef}
       className="relative w-full overflow-hidden bg-[--bg-color] pb-16 pt-4 px-4 md:px-10 lg:px-20 sm:py-24"
     >
-      <motion.div
+      <Motion.div
         style={{ opacity, y }}
         className="container mx-auto px-4 text-center"
       >
@@ -94,18 +94,18 @@ const InteractiveImageBentoGallery = ({ imageItems, title, description }) => {
         <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
           {description}
         </p>
-      </motion.div>
+      </Motion.div>
 
-      <motion.div
+      <Motion.div
         className="mx-auto w-full max-w-7xl px-4 md:px-8"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <motion.div className="grid grid-cols-1 gap-6 auto-rows-[12rem] md:auto-rows-[12rem] md:grid-cols-2 lg:grid-cols-4">
+        <Motion.div className="grid grid-cols-1 gap-6 auto-rows-[12rem] md:auto-rows-[12rem] md:grid-cols-2 lg:grid-cols-4">
           {imageItems.map((item) => (
-            <motion.div
+            <Motion.div
               key={item.id}
               variants={itemVariants}
               className={cn(
@@ -129,10 +129,10 @@ const InteractiveImageBentoGallery = ({ imageItems, title, description }) => {
                 <h3 className="text-lg font-bold text-white">{item.title}</h3>
                 <p className="mt-1 text-sm text-white/80">{item.desc}</p>
               </div>
-            </motion.div>
+            </Motion.div>
           ))}
-        </motion.div>
-      </motion.div>
+        </Motion.div>
+      </Motion.div>
 
       <AnimatePresence>
         {selectedItem && (

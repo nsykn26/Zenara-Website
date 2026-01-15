@@ -5,7 +5,6 @@ export default function TextScrollMarquee({
   baseVelocity = 1,
   direction = 'left',
   className = '',
-  scrollDependent = true,
   delay = 0,
 }) {
   const containerRef = useRef(null)
