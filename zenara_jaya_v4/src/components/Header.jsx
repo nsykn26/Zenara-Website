@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion as Motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import WhiteLogo from '../assets/White.png';
 
 const Header = () => {
   const [isHidden, setIsHidden] = useState(false);
@@ -34,7 +35,7 @@ const Header = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-4">
             <a className="flex items-center" href="#">
-              <img src="/src/assets/White.png" alt="Zenara Jaya Logo" className="h-6 w-auto" />
+              <img src={WhiteLogo} alt="Zenara Jaya Logo" className="h-6 w-auto" />
             </a>
 
             <button

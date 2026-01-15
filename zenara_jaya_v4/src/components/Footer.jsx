@@ -1,4 +1,5 @@
 import RevealOnScroll from './ui/RevealOnScroll';
+import WhiteLogo from '../assets/White.png';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -10,7 +11,7 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="col-span-1 md:col-span-2">
               <a href="#" className="flex items-center mb-4">
-                <img src="/src/assets/White.png" alt="Zenara Jaya Logo" className="h-8 w-auto" />
+                <img src={WhiteLogo} alt="Zenara Jaya Logo" className="h-8 w-auto" />
               </a>
               <p className="text-gray-400 mb-6 max-w-sm">
                 Transforming ideas into digital reality with cutting-edge web solutions and creative design.
