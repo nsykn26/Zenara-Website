@@ -1,5 +1,6 @@
 import InteractiveImageBentoGallery from "@/components/ui/bento-gallery"
 import dynastyWebsiteImg from "../assets/dynasty-website.png"
+import portfolioImg2 from "../assets/portfolio-2.jpg"
 
 // Sample data for the image gallery
 const imageItems = [
@@ -12,9 +13,9 @@ const imageItems = [
   },
   {
     id: 2,
-    title: "Coastal Arch",
-    desc: "Where the land meets the sea.",
-    url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+    title: "Website Design",
+    desc: "-",
+    url: portfolioImg2,
     span: "md:col-span-2 md:row-span-2",
   },
 ]

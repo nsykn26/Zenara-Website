@@ -23,7 +23,8 @@
 }
 
 #root {
-  padding: 70px 0;
+  padding-top: 70px;
+  padding-bottom: 0;
   position: relative;
   z-index: 1;
 }
@@ -260,11 +261,11 @@ button {
   margin: 0;
 }
 
-.footer .footer-section a {
+.footer a {
   text-decoration: none;
 }
 
-.footer .footer-section a:hover {
+.footer  a:hover {
   color: var(--link-hover-color);
   transition: all 0.2s ease;
   cursor: pointer;
@@ -407,4 +408,3 @@ button {
   width: 16.5%;
   display: flex;
 }
-

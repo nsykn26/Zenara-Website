@@ -1,47 +1,32 @@
-import { useGSAP } from "@gsap/react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { useRef } from "react";
 
 const CustomCursor = () => {
   const cursorRef = useRef(null);
-  const followerRef = useRef(null);
 
-  useGSAP(() => {
-    const cursorXSetter = gsap.quickTo("#cursor", "x", {
-      duration: 0.2,
-      ease: "power3",
-    });
-    const cursorYSetter = gsap.quickTo(cursorRef.current, "y", {
-      duration: 0.2,
-      ease: "power3",
-    });
+  useEffect(() => {
+    const cursor = cursorRef.current;
+    if (!cursor) return;
 
-    const followerXSetter = gsap.quickTo(followerRef.current, "x", {
-      duration: 0.6,
-      ease: "power3",
-    });
-    const followerYSetter = gsap.quickTo("#follower", "y", {
-      duration: 0.6,
-      ease: "power3",
-    });
+    // Use xPercent/yPercent to maintain centering while moving x/y
+    gsap.set(cursor, { xPercent: -50, yPercent: -50 });
 
-    window.addEventListener("mousemove", (e) => {
-      const x = e.clientX;
-      const y = e.clientY;
+    const xTo = gsap.quickTo(cursor, "x", { duration: 0.2, ease: "power3" });
+    const yTo = gsap.quickTo(cursor, "y", { duration: 0.2, ease: "power3" });
 
-      cursorXSetter(x);
-      cursorYSetter(y);
-      followerXSetter(x);
-      followerYSetter(y);
-    });
+    const onMouseMove = (e) => {
+      xTo(e.clientX);
+      yTo(e.clientY);
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+    };
   }, []);
 
-  return (
-    <>
-      <span id="cursor" ref={cursorRef} />
-      <span id="follower" ref={followerRef} />
-    </>
-  );
+  return <div ref={cursorRef} className="custom-cursor" id="customCursor" />;
 };
 
 export default CustomCursor;
